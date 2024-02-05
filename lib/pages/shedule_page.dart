@@ -37,7 +37,6 @@ class _ScheduleTableState extends State<ScheduleTable> {
     }
   }
 
-  // Добавлен метод для перевода дней недели на русский
   String translateDay(String day) {
     switch (day) {
       case 'monday':
@@ -50,7 +49,6 @@ class _ScheduleTableState extends State<ScheduleTable> {
         return 'Четверг';
       case 'friday':
         return 'Пятница';
-      // Добавьте обработку других дней недели по необходимости
       default:
         return day;
     }
@@ -74,7 +72,8 @@ class DayTable extends StatelessWidget {
   final String day;
   final List<Map<String, dynamic>> lessons;
 
-  const DayTable({super.key, required this.day, required this.lessons});
+  const DayTable({Key? key, required this.day, required this.lessons})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +82,13 @@ class DayTable extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(day),
+          Text(
+            day,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.blue, // Измените на нужный вам цвет
+            ),
+          ),
           DataTable(
             columnSpacing: 36.0,
             columns: const [
