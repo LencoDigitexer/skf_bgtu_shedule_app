@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/group_selection_screen.dart';
 import 'pages/home_screen.dart';
+import 'app/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,6 +12,8 @@ void main() async {
   runApp(MyApp(group_select: group_select));
 }
 
+final theme = AppTheme();
+
 class MyApp extends StatelessWidget {
   final String? group_select;
 
@@ -19,6 +22,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Расписание СКФ БГТУ',
+      theme: theme.lightTheme,
+      darkTheme: theme.darkTheme,
+      themeMode: ThemeMode.system,
       home: group_select != null
           ? HomeScreen(group_select: group_select!)
           : GroupSelectionScreen(),
@@ -58,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                await saveCredentials();/*
+                await saveCredentials(); /*
                 Navigator.pushReplacement(
                   context,
                   

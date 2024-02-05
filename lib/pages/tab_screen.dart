@@ -11,16 +11,28 @@ class CupertinoTabBarDemo extends StatelessWidget {
         tabBar: CupertinoTabBar(
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.car),
-              label: 'Car',
+              icon: Icon(Icons.calendar_today),
+              label: 'ПН',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.bus),
-              label: 'Transit',
+              icon: Icon(Icons.calendar_today),
+              label: 'ВТ',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.battery_0),
-              label: 'Bike',
+              icon: Icon(Icons.calendar_today),
+              label: 'СР',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today),
+              label: 'ЧТ',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today),
+              label: 'ПТ',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today),
+              label: 'СБ',
             ),
           ],
         ),
@@ -29,31 +41,32 @@ class CupertinoTabBarDemo extends StatelessWidget {
             builder: (BuildContext context) {
               switch (index) {
                 case 0:
-                  return CupertinoPageScaffold(
-                    navigationBar: CupertinoNavigationBar(
-                      middle: Text('Car Tab'),
-                    ),
-                    child: Center(
-                      child: _buildDataTable(),
-                    ),
-                  );
+                  return CupertinoTabView(builder: (context) {
+                    return const CupertinoPageScaffold(
+                        navigationBar: CupertinoNavigationBar(
+                          middle: Text('ГРУППА ВМ-11'),
+                        ),
+                        child: Center(child: Text('ГРУППА ВМ-11')));
+                  });
                 case 1:
-                  return CupertinoPageScaffold(
-                    navigationBar: CupertinoNavigationBar(
-                      middle: Text('Transit Tab'),
-                    ),
-                    child: Center(
-                      child: _buildDataTable(),
-                    ),
+                  return CupertinoTabView(
+                    builder: (context) {
+                      return CustomScrollView(
+                        slivers: <Widget>[
+                          CupertinoSliverNavigationBar(
+                            largeTitle: Text('Chats'),
+                          ),
+                        ],
+                      );
+                    },
                   );
                 case 2:
                   return CupertinoPageScaffold(
                     navigationBar: CupertinoNavigationBar(
                       middle: Text('Bike Tab'),
                     ),
-                    child: Center(
-                      child: _buildDataTable(),
-                    ),
+                    child: Center(child: _buildDataTable()),
+                    backgroundColor: Colors.transparent,
                   );
                 default:
                   return Container();
