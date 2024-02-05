@@ -39,8 +39,7 @@ class _ScheduleTableState extends State<ScheduleTable> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           for (var day in schedule.keys)
@@ -55,34 +54,38 @@ class DayTable extends StatelessWidget {
   final String day;
   final List<Map<String, dynamic>> lessons;
 
-  DayTable({required this.day, required this.lessons});
+  const DayTable({super.key, required this.day, required this.lessons});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(15.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(day, style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(day),
           DataTable(
-            columnSpacing: 16.0,
-            columns: [
+            columnSpacing: 36.0,
+            columns: const [
               DataColumn(
-                label: Text('Номер пары',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                label: Text(
+                  '№',
+                ),
               ),
               DataColumn(
-                label: Text('Дисциплина',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                label: Text(
+                  'Дисциплина',
+                ),
               ),
               DataColumn(
-                label: Text('Преподаватель',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                label: Text(
+                  'Преподаватель',
+                ),
               ),
               DataColumn(
-                label: Text('Аудитория',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                label: Text(
+                  'Аудитория',
+                ),
               ),
             ],
             rows: generateRows(),
@@ -97,14 +100,18 @@ class DayTable extends StatelessWidget {
     lessons.forEach((lesson) {
       rows.add(DataRow(
         cells: [
-          DataCell(Text(lesson['number'].toString(),
-              style: TextStyle(fontSize: 14.0))),
-          DataCell(Text(lesson['discipline'] ?? '',
-              style: TextStyle(fontSize: 14.0))),
-          DataCell(
-              Text(lesson['lecturer'] ?? '', style: TextStyle(fontSize: 14.0))),
-          DataCell(
-              Text(lesson['office'] ?? '', style: TextStyle(fontSize: 14.0))),
+          DataCell(Text(
+            lesson['number'].toString(),
+          )),
+          DataCell(Text(
+            lesson['discipline'] ?? '',
+          )),
+          DataCell(Text(
+            lesson['lecturer'] ?? '',
+          )),
+          DataCell(Text(
+            lesson['office'] ?? '',
+          )),
         ],
       ));
     });
