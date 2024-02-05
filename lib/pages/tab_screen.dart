@@ -33,30 +33,12 @@ class _MaterialTabBarDemoState extends State<MaterialTabBarDemo>
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Material Design Tabs Demo'),
+          title: Text('ГРУППА ВМ-11'),
         ),
         body: TabBarView(
           controller: _tabController,
           children: [
-            const Center(child: Text('ГРУППА ВМ-11')),
-            CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar(
-                  title: Text('Вторник'),
-                  expandedHeight: 200.0,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Image.network(
-                      'https://example.com/image.jpg', // Замените на свою ссылку на изображение
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Center(child: _buildDataTable()),
-            ),
+            _buildDaysOfWeek(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -67,15 +49,11 @@ class _MaterialTabBarDemoState extends State<MaterialTabBarDemo>
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.calendar_today),
-              label: 'ПН',
+              label: 'Пары',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today),
-              label: 'ВТ',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today),
-              label: 'СР',
+              icon: Icon(Icons.lock_clock),
+              label: 'Расписание звонков',
             ),
           ],
         ),
@@ -83,7 +61,19 @@ class _MaterialTabBarDemoState extends State<MaterialTabBarDemo>
     );
   }
 
-  Widget _buildDataTable() {
+  Widget _buildDaysOfWeek() {
+    return ListView(
+      children: [
+        _buildDataTable('Понедельник'),
+        _buildDataTable('Вторник'),
+        _buildDataTable('Среда'),
+        _buildDataTable('Четверг'),
+        _buildDataTable('Пятница'),
+      ],
+    );
+  }
+
+  Widget _buildDataTable(String day) {
     return DataTable(
       columns: const [
         DataColumn(label: Text('Пара')),
@@ -97,19 +87,19 @@ class _MaterialTabBarDemoState extends State<MaterialTabBarDemo>
           DataCell(Text('14')),
         ]),
         DataRow(cells: [
-          DataCell(Text('2\n10:10 - 11:40')),
-          DataCell(Text('Физическая культура\nИванов И.В.')),
-          DataCell(Text('14')),
+          DataCell(Text('3\n11:50 - 13:20')),
+          DataCell(Text('Математика\nПетров П.П.')),
+          DataCell(Text('21')),
         ]),
         DataRow(cells: [
-          DataCell(Text('2\n10:10 - 11:40')),
-          DataCell(Text('Физическая культура\nИванов И.В.')),
-          DataCell(Text('14')),
+          DataCell(Text('4\n14:00 - 15:30')),
+          DataCell(Text('Физика\nСидоров С.С.')),
+          DataCell(Text('17')),
         ]),
         DataRow(cells: [
-          DataCell(Text('2\n10:10 - 11:40')),
-          DataCell(Text('Физическая культура\nИванов И.В.')),
-          DataCell(Text('14')),
+          DataCell(Text('5\n15:40 - 17:10')),
+          DataCell(Text('Информатика\nКозлов К.К.')),
+          DataCell(Text('23')),
         ]),
       ],
     );
