@@ -58,8 +58,7 @@ class _GroupSelectionScreenState extends State<GroupSelectionScreen> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => CupertinoTabBarDemo()),
+                  MaterialPageRoute(builder: (context) => MaterialTabBarDemo()),
                 );
               },
               child: Text("Test"),

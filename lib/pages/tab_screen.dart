@@ -1,14 +1,57 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CupertinoTabBarDemo extends StatelessWidget {
-  const CupertinoTabBarDemo({Key? key}) : super(key: key);
+class MaterialTabBarDemo extends StatefulWidget {
+  const MaterialTabBarDemo({Key? key}) : super(key: key);
+
+  @override
+  _MaterialTabBarDemoState createState() => _MaterialTabBarDemoState();
+}
+
+class _MaterialTabBarDemoState extends State<MaterialTabBarDemo>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      home: CupertinoTabScaffold(
-        tabBar: CupertinoTabBar(
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Material Design Tabs Demo'),
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            const Center(child: Text('ГРУППА ВМ-11')),
+            CustomScrollView(
+              slivers: <Widget>[
+                SliverAppBar(
+                  title: Text('Вторник'),
+                  expandedHeight: 200.0,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Image.network(
+                      'https://example.com/image.jpg', // Замените на свою ссылку на изображение
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Center(child: _buildDataTable()),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _tabController.index,
+          onTap: (int index) {
+            setState(() {
+              _tabController.index = index;
+            });
+          },
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.calendar_today),
@@ -22,58 +65,8 @@ class CupertinoTabBarDemo extends StatelessWidget {
               icon: Icon(Icons.calendar_today),
               label: 'СР',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today),
-              label: 'ЧТ',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today),
-              label: 'ПТ',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today),
-              label: 'СБ',
-            ),
           ],
         ),
-        tabBuilder: (BuildContext context, int index) {
-          return CupertinoTabView(
-            builder: (BuildContext context) {
-              switch (index) {
-                case 0:
-                  return CupertinoTabView(builder: (context) {
-                    return const CupertinoPageScaffold(
-                        navigationBar: CupertinoNavigationBar(
-                          middle: Text('ГРУППА ВМ-11'),
-                        ),
-                        child: Center(child: Text('ГРУППА ВМ-11')));
-                  });
-                case 1:
-                  return CupertinoTabView(
-                    builder: (context) {
-                      return CustomScrollView(
-                        slivers: <Widget>[
-                          CupertinoSliverNavigationBar(
-                            largeTitle: Text('Chats'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                case 2:
-                  return CupertinoPageScaffold(
-                    navigationBar: CupertinoNavigationBar(
-                      middle: Text('Bike Tab'),
-                    ),
-                    child: Center(child: _buildDataTable()),
-                    backgroundColor: Colors.transparent,
-                  );
-                default:
-                  return Container();
-              }
-            },
-          );
-        },
       ),
     );
   }
