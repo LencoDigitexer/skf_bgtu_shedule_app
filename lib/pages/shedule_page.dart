@@ -56,15 +56,19 @@ class _ScheduleTableState extends State<ScheduleTable> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (var day in schedule.keys)
-            DayTable(day: day, lessons: schedule[day] ?? []),
-        ],
-      ),
-    );
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Group Selection'),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (var day in schedule.keys)
+                DayTable(day: day, lessons: schedule[day] ?? []),
+            ],
+          ),
+        ));
   }
 }
 
