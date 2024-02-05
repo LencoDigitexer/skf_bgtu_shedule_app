@@ -25,7 +25,8 @@ class _ScheduleTableState extends State<ScheduleTable> {
       Map<String, List<Map<String, dynamic>>> convertedSchedule = {};
 
       scheduleData.forEach((day, lessons) {
-        convertedSchedule[day] = List<Map<String, dynamic>>.from(lessons);
+        convertedSchedule[translateDay(day)] =
+            List<Map<String, dynamic>>.from(lessons);
       });
 
       setState(() {
@@ -33,6 +34,25 @@ class _ScheduleTableState extends State<ScheduleTable> {
       });
     } else {
       throw Exception('Failed to load schedule');
+    }
+  }
+
+  // Добавлен метод для перевода дней недели на русский
+  String translateDay(String day) {
+    switch (day) {
+      case 'monday':
+        return 'Понедельник';
+      case 'tuesday':
+        return 'Вторник';
+      case 'wednesday':
+        return 'Среда';
+      case 'thursday':
+        return 'Четверг';
+      case 'friday':
+        return 'Пятница';
+      // Добавьте обработку других дней недели по необходимости
+      default:
+        return day;
     }
   }
 
