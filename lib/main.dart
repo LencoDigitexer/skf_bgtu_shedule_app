@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/group_selection_screen.dart';
 import 'pages/home_screen.dart';
+import 'pages/shedule_page.dart';
 import 'app/app.dart';
 
 void main() async {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       home: group_select != null
           ? HomeScreen(group_select: group_select!)
-          : GroupSelectionScreen(),
+          : ScheduleTable(),
     );
   }
 }
