@@ -55,6 +55,7 @@ class _GroupSelectionScreenState extends State<GroupSelectionScreen> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
+            /*
             ElevatedButton(
               onPressed: () {
                 Navigator.pushReplacement(
@@ -64,6 +65,7 @@ class _GroupSelectionScreenState extends State<GroupSelectionScreen> {
               },
               child: Text("Test"),
             ),
+            */
             if (groups.isEmpty)
               CircularProgressIndicator()
             else
