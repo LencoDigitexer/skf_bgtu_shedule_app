@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'group_selection_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ScheduleTable extends StatefulWidget {
+  final String groupSelect;
+
+  ScheduleTable({required this.groupSelect});
+
   @override
   _ScheduleTableState createState() => _ScheduleTableState();
 }
@@ -18,7 +24,7 @@ class _ScheduleTableState extends State<ScheduleTable> {
 
   Future<void> fetchSchedule() async {
     final response = await http.get(Uri.parse(
-        'https://raw.githubusercontent.com/LencoDigitexer/schedule-api/main/skf-bgtu/vm11/schedule.json'));
+        'https://raw.githubusercontent.com/LencoDigitexer/schedule-api/main/skf-bgtu/${widget.groupSelect}/schedule.json'));
     if (response.statusCode == 200) {
       Map<String, dynamic> data = json.decode(response.body);
       Map<String, dynamic> scheduleData = data['schedule'];
@@ -63,6 +69,15 @@ class _ScheduleTableState extends State<ScheduleTable> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Group Selection'),
+          leading: BackButton(
+            onPressed: () {
+              clearCredentials();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => GroupSelectionScreen()),
+              );
+            },
+          ),
         ),
         body: Center(
           child: TabBarView(
@@ -83,6 +98,11 @@ class _ScheduleTableState extends State<ScheduleTable> {
         ),
       ),
     );
+  }
+
+  Future<void> clearCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('group_select');
   }
 }
 

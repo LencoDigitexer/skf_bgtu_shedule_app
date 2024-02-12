@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home_screen.dart';
 import 'tab_screen.dart';
+import 'shedule_page.dart';
 
 class GroupSelectionScreen extends StatefulWidget {
   @override
@@ -42,7 +43,7 @@ class _GroupSelectionScreenState extends State<GroupSelectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Group Selection'),
+        title: Text('Расписание пар СКФ БГТУ'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -50,7 +51,7 @@ class _GroupSelectionScreenState extends State<GroupSelectionScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Select a group:',
+              'Выбери свою группу:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
@@ -79,8 +80,8 @@ class _GroupSelectionScreenState extends State<GroupSelectionScreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen(
-                                    group_select: _groupController.text)),
+                                builder: (context) => ScheduleTable(
+                                    groupSelect: _groupController.text)),
                           );
                         },
                         child: Text(group.description),

@@ -29,11 +29,10 @@ class MyApp extends StatelessWidget {
       darkTheme: theme.darkTheme,
       themeMode: ThemeMode.system,
       home: group_select != null
-          ? HomeScreen(group_select: group_select!) //home_screen.dart
-          : ScheduleTable(), // shedule_page.dart
+          //? HomeScreen(group_select: group_select!) //home_screen.dart
+          ? ScheduleTable(groupSelect: group_select!) // shedule_page.dart
           //: MaterialTabBarDemo(), // tab_screen.dart
-          //: GroupSelectionScreen(), //group_selection_screen.dart
-      
+          : GroupSelectionScreen(), //group_selection_screen.dart
     );
   }
 }
