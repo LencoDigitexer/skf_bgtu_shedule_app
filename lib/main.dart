@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/group_selection_screen.dart';
 import 'pages/home_screen.dart';
 import 'pages/shedule_page.dart';
+import 'pages/tab_screen.dart';
 import 'app/app.dart';
 
 void main() async {
@@ -28,8 +29,11 @@ class MyApp extends StatelessWidget {
       darkTheme: theme.darkTheme,
       themeMode: ThemeMode.system,
       home: group_select != null
-          ? HomeScreen(group_select: group_select!)
-          : ScheduleTable(),
+          ? HomeScreen(group_select: group_select!) //home_screen.dart
+          : ScheduleTable(), // shedule_page.dart
+          //: MaterialTabBarDemo(), // tab_screen.dart
+          //: GroupSelectionScreen(), //group_selection_screen.dart
+      
     );
   }
 }

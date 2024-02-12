@@ -40,15 +40,17 @@ class _ScheduleTableState extends State<ScheduleTable> {
   String translateDay(String day) {
     switch (day) {
       case 'monday':
-        return 'Понедельник';
+        return 'ПН';
       case 'tuesday':
-        return 'Вторник';
+        return 'ВТ';
       case 'wednesday':
-        return 'Среда';
+        return 'СР';
       case 'thursday':
-        return 'Четверг';
+        return 'ЧТ';
       case 'friday':
-        return 'Пятница';
+        return 'ПТ';
+      case 'saturday':
+        return 'СБ';
       default:
         return day;
     }
@@ -56,19 +58,29 @@ class _ScheduleTableState extends State<ScheduleTable> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: schedule.length,
+      child: Scaffold(
         appBar: AppBar(
           title: Text('Group Selection'),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              for (var day in schedule.keys)
-                DayTable(day: day, lessons: schedule[day] ?? []),
-            ],
-          ),
-        ));
+        body: TabBarView(
+          children: [
+            for (var day in schedule.keys)
+              DayTable(day: day, lessons: schedule[day] ?? []),
+          ],
+        ),
+        bottomNavigationBar: TabBar(
+          isScrollable: false, // Set to false to stretch tabs across the screen
+          tabs: [
+            for (var day in schedule.keys)
+              Tab(
+                text: day,
+              ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
