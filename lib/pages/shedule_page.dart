@@ -64,14 +64,16 @@ class _ScheduleTableState extends State<ScheduleTable> {
         appBar: AppBar(
           title: Text('Group Selection'),
         ),
-        body: TabBarView(
-          children: [
-            for (var day in schedule.keys)
-              DayTable(day: day, lessons: schedule[day] ?? []),
-          ],
+        body: Center(
+          child: TabBarView(
+            children: [
+              for (var day in schedule.keys)
+                DayTable(day: day, lessons: schedule[day] ?? []),
+            ],
+          ),
         ),
         bottomNavigationBar: TabBar(
-          isScrollable: false, // Set to false to stretch tabs across the screen
+          isScrollable: false,
           tabs: [
             for (var day in schedule.keys)
               Tab(
@@ -93,45 +95,49 @@ class DayTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            day,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.blue, // Измените на нужный вам цвет
+    return Center(
+      // Wrap the Column with Center widget
+      child: Container(
+        margin: const EdgeInsets.all(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              day,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
             ),
-          ),
-          DataTable(
-            columnSpacing: 36.0,
-            columns: const [
-              DataColumn(
-                label: Text(
-                  '№',
+            DataTable(
+              dataRowHeight: 60.0,
+              columnSpacing: 36.0,
+              columns: const [
+                DataColumn(
+                  label: Text(
+                    '№',
+                  ),
                 ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Дисциплина',
+                DataColumn(
+                  label: Text(
+                    'Дисциплина',
+                  ),
                 ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Преподаватель',
+                DataColumn(
+                  label: Text(
+                    'Преподаватель',
+                  ),
                 ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Аудитория',
+                DataColumn(
+                  label: Text(
+                    'Аудитория',
+                  ),
                 ),
-              ),
-            ],
-            rows: generateRows(),
-          ),
-        ],
+              ],
+              rows: generateRows(),
+            ),
+          ],
+        ),
       ),
     );
   }
