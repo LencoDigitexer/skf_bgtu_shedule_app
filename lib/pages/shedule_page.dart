@@ -15,11 +15,30 @@ class ScheduleTable extends StatefulWidget {
 
 class _ScheduleTableState extends State<ScheduleTable> {
   Map<String, List<Map<String, dynamic>>> schedule = {};
+  String groupName = ''; // Строка для хранения названия группы
 
   @override
   void initState() {
     super.initState();
+    fetchGroups(); // Загрузка данных о группах при инициализации
     fetchSchedule();
+  }
+
+  Future<void> fetchGroups() async {
+    final response = await http.get(Uri.parse(
+        'https://raw.githubusercontent.com/LencoDigitexer/schedule-api/main/skf-bgtu/groups.json'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final groups = data['groups'];
+      final selectedGroup = groups.firstWhere(
+          (group) => group['name'] == widget.groupSelect,
+          orElse: () => {'description': 'Твоя группа'});
+      setState(() {
+        groupName = selectedGroup['description'];
+      });
+    } else {
+      throw Exception('Failed to load groups');
+    }
   }
 
   Future<void> fetchSchedule() async {
@@ -68,7 +87,7 @@ class _ScheduleTableState extends State<ScheduleTable> {
       length: schedule.length,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Group Selection'),
+          title: Text(groupName), // Название группы
           leading: BackButton(
             onPressed: () {
               clearCredentials();
