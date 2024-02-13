@@ -5,13 +5,17 @@ import 'pages/home_screen.dart';
 import 'pages/shedule_page.dart';
 import 'pages/tab_screen.dart';
 import 'app/app.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? group_select = prefs.getString('group_select');
 
-  runApp(MyApp(group_select: group_select));
+  runApp(DevicePreview(
+    enabled: true,
+    builder: (context) => MyApp(group_select: group_select),
+  ));
 }
 
 final theme = AppTheme();
@@ -37,6 +41,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/*
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -93,3 +98,4 @@ class _LoginScreenState extends State<LoginScreen> {
     prefs.setString('password', _passwordController.text);
   }
 }
+*/
