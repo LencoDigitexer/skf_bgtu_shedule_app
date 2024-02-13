@@ -149,7 +149,7 @@ class DayTable extends StatelessWidget {
               ),
             ),
             DataTable(
-              dataRowHeight: 60.0,
+              dataRowHeight: 160.0,
               columnSpacing: 36.0,
               columns: const [
                 DataColumn(
@@ -160,11 +160,6 @@ class DayTable extends StatelessWidget {
                 DataColumn(
                   label: Text(
                     'Дисциплина',
-                  ),
-                ),
-                DataColumn(
-                  label: Text(
-                    'Преподаватель',
                   ),
                 ),
                 DataColumn(
@@ -187,16 +182,23 @@ class DayTable extends StatelessWidget {
       rows.add(DataRow(
         cells: [
           DataCell(Text(
-            lesson['number'].toString(),
+            lesson['number'].toString() + " " + "Test",
           )),
+          DataCell(
+            Container(
+                padding: EdgeInsets.all(30),
+                child: Column(
+                  children: [
+                    Text(lesson['discipline'] ?? "",
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(
+                      lesson['lecturer'] ?? "",
+                    ),
+                  ],
+                )),
+          ),
           DataCell(Text(
-            lesson['discipline'] ?? '',
-          )),
-          DataCell(Text(
-            lesson['lecturer'] ?? '',
-          )),
-          DataCell(Text(
-            lesson['office'] ?? '',
+            lesson['office'] ?? '' + " 123",
           )),
         ],
       ));
